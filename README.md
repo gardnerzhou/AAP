@@ -1,8 +1,8 @@
 # Active-Associative Prompting (AAP)
 
-Official implementation of **"Active-Associative Prompting: Closed-Loop Correction with Cohort-Level Association for Scribble-Supervised Medical Image Segmentation."**
+Core implementation of **"Active-Associative Prompting: Closed-Loop Correction with Cohort-Level Association for Scribble-Supervised Medical Image Segmentation."**
 
-AAP combines:
+AAP contains two main components:
 - **ACS**: cohort-level prototype association with DPP-based memory curation.
 - **AIS**: prediction-dependent corrective prompting with a PPO agent trained from scribble-derived rewards.
 
@@ -16,37 +16,14 @@ bash checkpoints/download_ckpts.sh
 
 ## Data
 
-Set dataset paths in `cfg.py`. The experiments use **SUN-SEG**, **ISIC2018**, and **CHAOS**.
+Set the dataset paths in `cfg.py`. The experiments use **SUN-SEG**, **ISIC2018**, and **CHAOS**.
 
-## Training
+## Core code
 
-```bash
-CUDA_VISIBLE_DEVICES=0 python train_2d_sunseg.py \
-  -dataset SUNSEG \
-  -exp_name aap_sunseg \
-  -use_memory_attention True \
-  -positive_prompt_num 2 \
-  -negative_prompt_num 1 \
-  -memory_bank_size 64 \
-  -num_memory_used 8 \
-  -ppo_lr_actor 3e-4 \
-  -ppo_lr_critic 3e-4 \
-  -ppo_gamma 0.99 \
-  -ppo_entropy_coef 0.01 \
-  -lr 1e-5 \
-  -num_epochs 6
-```
+- `func_2d/PPO_prompt.py`: PPO actor-critic prompting policy.
+- `func_2d/utils_memory.py`: DPP-based cohort memory curation.
+- `func_2d/utils_reinfor.py`: prompt-related utilities.
+- `func_2d/postprocess.py`: segmentation post-processing.
+- `cfg.py`: experiment configuration.
 
-## Testing
-
-```bash
-CUDA_VISIBLE_DEVICES=0 python test.py -exp_name aap_sunseg
-```
-
-## Checkpoints
-
-SAM2 pretrained weights are not included. Run `checkpoints/download_ckpts.sh` to download the required checkpoint.
-
-## License
-
-Apache License 2.0. See `LICENSE`.
+Pretrained SAM2 weights are not included in this repository.
