@@ -15,7 +15,7 @@ python tools/prepare_sam2.py
 bash checkpoints/download_ckpts.sh
 ```
 
-The pretrained SAM2 checkpoint is downloaded to `checkpoints/sam2_hiera_large.pt`. Model weights are not stored in this repository.
+The pretrained SAM2 checkpoint is downloaded to `checkpoints/sam2_hiera_large.pt`.
 
 ## Data
 
@@ -58,5 +58,3 @@ python test.py \
   -test_save_path test_save \
   -args_yaml_path logs/aap_sunseg/args.yaml
 ```
-
-Datasets, pretrained weights, logs, and experiment outputs are not included in this repository.
