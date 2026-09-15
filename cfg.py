@@ -16,8 +16,8 @@ def parse_args():
     parser.add_argument('-image_size', type=int, default=1024, help='image_size')
     parser.add_argument('-out_size', type=int, default=1024, help='output_size')
     parser.add_argument('-distributed', default='none', type=str, help='multi GPU ids to use')
-    parser.add_argument('-dataset', default='REFUGE', type=str, help='dataset name: SUNSEG, ISIC2017, ISIC2018, REFUGE, PancreasCT, CHAOS')
-    parser.add_argument('-sam_ckpt', type=str, default='/data/whl/Medical-SAM2-main/checkpoints/sam2_hiera_large.pt', help='sam checkpoint address')
+    parser.add_argument('-dataset', default='SUNSEG', type=str, help='dataset name: SUNSEG, ISIC2017, ISIC2018, REFUGE, PancreasCT, CHAOS')
+    parser.add_argument('-sam_ckpt', type=str, default='checkpoints/sam2_hiera_large.pt', help='sam checkpoint address')
     parser.add_argument('-sam_config', type=str, default='sam2_hiera_l', help='sam checkpoint config')
     parser.add_argument('-video_length', type=int, default=2, help='video length')
     parser.add_argument('-b', type=int, default=8, help='batch size for dataloader')
@@ -58,14 +58,14 @@ def parse_args():
     parser.add_argument('-use_prompt_warmup', type=bool, default=False)
     parser.add_argument('-prompt_warmup_epochs', type=int, default=10)
     parser.add_argument('-per_step_backprop', type=bool, default=False)
-    parser.add_argument('-save_path', type=str, default='/data/whl/Medical-SAM2-main/logs')
-    parser.add_argument('-test_save_path', type=str, default='/data/whl/Medical-SAM2-main/test_save')
-    parser.add_argument('-exp_name', type=str, default='exp_refuge1')
-    parser.add_argument('-raw_data_path', type=str, default='/data/whl/Datasets/SUN-SEG-Annotation/')
-    parser.add_argument('-isic2017_path', type=str, default='/data/whl/Datasets/ISIC2017')
-    parser.add_argument('-isic2018_path', type=str, default='/data/whl/Datasets/ISIC2018')
-    parser.add_argument('-pancreas_ct_path', type=str, default='/data/whl/Datasets/Pancreas-CT')
-    parser.add_argument('-chaos_path', type=str, default='/data/whl/Datasets/CHAOS')
+    parser.add_argument('-save_path', type=str, default='logs')
+    parser.add_argument('-test_save_path', type=str, default='test_save')
+    parser.add_argument('-exp_name', type=str, default='aap_sunseg')
+    parser.add_argument('-raw_data_path', type=str, default='data/SUN-SEG')
+    parser.add_argument('-isic2017_path', type=str, default='data/ISIC2017')
+    parser.add_argument('-isic2018_path', type=str, default='data/ISIC2018')
+    parser.add_argument('-pancreas_ct_path', type=str, default='data/Pancreas-CT')
+    parser.add_argument('-chaos_path', type=str, default='data/CHAOS')
     parser.add_argument('-memory_path', type=str, default='')
     parser.add_argument('-args_yaml_path', type=str, default=None)
 
@@ -78,7 +78,7 @@ def parse_args():
     elif opt.dataset == 'ISIC2018':
         opt.data_path = opt.isic2018_path
     elif opt.dataset == 'REFUGE':
-        opt.refuge_path = getattr(opt, 'refuge_path', '/data/whl/Datasets/REFUGE')
+        opt.refuge_path = getattr(opt, 'refuge_path', 'data/REFUGE')
         opt.data_path = opt.refuge_path
     elif opt.dataset == 'PancreasCT':
         opt.data_path = opt.pancreas_ct_path
